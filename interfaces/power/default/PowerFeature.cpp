@@ -28,10 +28,22 @@ namespace vendor {
 namespace aospa {
 namespace power {
 
+#ifdef MODE_EXT
+extern bool isDeviceSpecificModeSupported(Mode type, bool* _aidl_return);
+extern bool setDeviceSpecificMode(Mode type, bool enabled);
+#endif
+
 static constexpr int kInputEventWakeupModeOff = 4;
 static constexpr int kInputEventWakeupModeOn = 5;
 
 ndk::ScopedAStatus PowerFeature::setFeature(Feature feature, bool enabled) {
+
+#ifdef MODE_EXT
+    if (setDeviceSpecificMode(type, enabled)) {
+        return ndk::ScopedAStatus::ok();
+    }
+#endif
+
     switch (feature) {
 #ifdef GESTURES_NODE
         case Feature::GESTURES:

@@ -3,6 +3,7 @@ soong_config_module_type {
     module_type: "cc_defaults",
     config_namespace: "aospaGestureVars",
     value_variables: [
+        "target_powerhal_mode_ext",
         "target_gestures_node",
         "target_tap_to_wake_node",
         "target_tap_to_wake_event_node",
@@ -27,6 +28,9 @@ soong_config_module_type {
 powerfeature_cc_defaults {
     name: "powerfeature_defaults",
     soong_config_variables: {
+        target_powerhal_mode_ext: {
+            srcs: ["../../../../../"%s\""],
+        },
         target_gestures_node: {
             cppflags: ["-DGESTURES_NODE=\"%s\""],
         },
